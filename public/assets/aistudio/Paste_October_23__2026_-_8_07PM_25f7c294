@@ -1,0 +1,1120 @@
+# CALMIFY — ULTIMATE MASTER BUILD PROMPT
+## AI-Powered Mental Wellness Platform | Three-Agent AI Architecture | Research-Grounded Responses | Workflow Automation | Production Security
+
+## 1. YOUR ROLE AND MISSION
+
+Act as a principal software architect, senior full-stack engineer, AI agent engineer, research systems engineer, automation architect, cybersecurity engineer, database specialist, and product designer.
+
+Build **Calmify**, a complete, scalable, responsive, AI-powered mental wellness web application that combines professional psychological research, personalized wellness support, three specialized AI agents, reliable workflow automation, and strong security controls.
+
+**Product name:** Calmify
+
+**Tagline:** A healthier mind, one day at a time.
+
+**Mission:** Help people understand their emotions, manage everyday stress, develop healthier habits, and access evidence-informed wellness guidance through an approachable and personalized digital experience.
+
+This must be a working application, not just a landing page, static dashboard, UI prototype, or generic chatbot.
+
+Build the frontend, backend, database, authentication, research ingestion and retrieval pipeline, AI agents, automation engine, notification system, administrative interfaces, security controls, tests, and deployment documentation.
+
+Inspect the available development environment first. Make reasonable engineering decisions independently. Implement the application in stages and continue working beyond planning or scaffolding.
+
+If an external provider, credential, or infrastructure component is unavailable, implement the integration and document the exact configuration required. Never claim that an integration, security control, notification, or test is working without verification.
+
+---
+
+# 2. CORE PRODUCT REQUIREMENTS
+
+Calmify must combine six foundational capabilities:
+
+1. **Research-grounded AI:** Responses informed by a curated library of credible psychological research and professionally reviewed mental wellness resources.
+2. **Three specialized AI agents:** Research and Evidence, Personalized Wellness Companion, and Safety and Response Validation.
+3. **Personalized wellness:** Mood tracking, journaling, wellness activities, habits, and progress summaries.
+4. **Workflow automation:** Scheduled check-ins, reminders, weekly reflections, event-driven research processing, and execution monitoring.
+5. **Privacy and security:** Secure authentication, strict data isolation, consent management, protected administration, and a comprehensive 20-point security program.
+6. **Scalable architecture:** Modular services, durable background jobs, configurable AI models, monitoring, testing, and deployment readiness.
+
+Calmify provides general mental wellness support. It is not a replacement for qualified psychologists, psychiatrists, clinical assessment, or emergency services. Do not claim that it diagnoses or treats mental health conditions.
+
+---
+
+# 3. TECHNOLOGY STACK
+
+Use the following architecture unless the available environment requires a clearly documented alternative.
+
+### Frontend
+- React with TypeScript.
+- Vite.
+- Tailwind CSS.
+- Framer Motion.
+- React Router.
+- Accessible reusable components.
+- A charting library for mood and progress visualizations.
+
+### Backend
+- Python with FastAPI.
+- Pydantic validation.
+- REST APIs.
+- Modular service and repository layers.
+- Background task processing.
+- OpenAPI documentation for backend APIs.
+
+### Database and authentication
+- PostgreSQL.
+- pgvector for semantic research retrieval.
+- Supabase Auth and PostgreSQL where supported.
+- Database migrations.
+- Row-level security where supported.
+- Server-enforced role-based access control.
+
+### AI infrastructure
+- Google Gemini API through its current supported official SDK.
+- Configurable model identifiers.
+- Structured outputs and tool calling where appropriate.
+- An embedding model for research documents.
+- A provider-independent AI service interface.
+
+### Automation
+- Celery with Redis or a compatible durable task queue.
+- A persistent scheduler such as Celery Beat or an appropriate managed scheduler.
+- Background workers.
+- Event-driven workflows.
+- Pluggable notification providers.
+- Retry handling, idempotency, and job execution monitoring.
+
+### Deployment and operations
+- Docker and Docker Compose.
+- Environment-based configuration.
+- CI/CD-ready automated tests.
+- Health checks and structured logging.
+- Deployment instructions for frontend, backend, database, and workers.
+
+Do not expose API keys in the frontend. If a service cannot run inside Google AI Studio, implement it as a separate deployable service with a clear interface.
+
+---
+
+# 4. COMPLETE APPLICATION MODULES
+
+Build the following connected modules:
+
+1. Public landing page.
+2. Authentication and onboarding.
+3. User dashboard.
+4. AI Wellness Companion chat.
+5. Research Library and RAG service.
+6. Mood Tracker.
+7. Digital Journal.
+8. Wellness Activities.
+9. Goals, Missions, and Progress.
+10. Automation Center.
+11. Notification Preferences.
+12. Safety and Support Center.
+13. User Profile and Privacy Settings.
+14. Research Administration Console.
+15. Automation Administration Console.
+16. Security Status and Production Readiness Dashboard.
+
+All modules must use real backend data, appropriate authorization, and working application flows.
+
+---
+
+# 5. THREE-AGENT AI ARCHITECTURE
+
+Implement three independently testable agents controlled by a central orchestrator.
+
+The agents may share the same underlying language model, but they must have distinct responsibilities, instructions, permissions, input/output schemas, and evaluation criteria.
+
+## AGENT 1: RESEARCH AND EVIDENCE AGENT
+
+### Purpose
+
+Retrieve credible psychological research and evidence-informed wellness information from Calmify's approved research library.
+
+### Responsibilities
+
+- Search actual indexed documents using semantic similarity and keyword matching.
+- Retrieve relevant passages and preserve source metadata.
+- Prioritize relevance, source quality, publication context, and professional review status.
+- Distinguish systematic reviews, peer-reviewed studies, clinical guidelines, preprints, and general educational resources.
+- Identify insufficient, outdated, or conflicting evidence.
+- Return source identifiers, titles, authors, publication years, DOI or verified URLs, and supporting passages where available.
+- Never invent papers, citations, authors, findings, or publication details.
+- Explicitly report when evidence is insufficient.
+
+### Technical implementation
+
+Implement genuine retrieval-augmented generation (RAG):
+
+Document upload → Text extraction → Chunking → Embedding generation → Vector indexing → Retrieval → Evidence selection → Citation mapping.
+
+Use pgvector and appropriate metadata filters. Only approved sources can be represented as professionally reviewed evidence.
+
+The agent must return structured evidence objects that the other agents can inspect.
+
+## AGENT 2: PERSONALIZED WELLNESS COMPANION AGENT
+
+### Purpose
+
+Convert retrieved evidence and user-approved context into clear, empathetic, practical wellness guidance.
+
+### Responsibilities
+
+- Understand the user's request and conversational context.
+- Communicate in simple, supportive, nonjudgmental language.
+- Explain psychological concepts in understandable terms.
+- Suggest suitable low-risk activities such as breathing, grounding, journaling, mindfulness, and manageable goals.
+- Personalize suggestions using explicitly consented preferences and relevant user-provided history.
+- Ask clarifying questions when necessary.
+- Use retrieved evidence when making research-dependent claims.
+- Distinguish research findings from general wellness suggestions.
+- Avoid overwhelming users with excessive advice.
+- Never diagnose conditions, prescribe medication, or recommend changing prescribed treatment.
+- Never encourage users to depend exclusively on Calmify.
+
+The agent must be transparent about uncertainty and must not impersonate a human clinician.
+
+## AGENT 3: SAFETY AND RESPONSE VALIDATION AGENT
+
+### Purpose
+
+Validate proposed responses and identify when a different safety workflow is required.
+
+### Responsibilities
+
+- Screen relevant messages for possible self-harm, suicide risk, abuse, immediate danger, and other high-risk disclosures.
+- Check research-dependent claims against retrieved evidence.
+- Flag unsupported clinical claims and mismatched citations.
+- Reject dangerous medication instructions, unsupported diagnoses, and harmful advice.
+- Identify stigmatizing, coercive, or overconfident responses.
+- Approve, revise, block, or escalate a proposed response.
+- Route high-risk cases to a predefined safety workflow.
+- Minimize retention of sensitive safety information.
+
+Use deterministic safety rules, appropriate risk classifiers, and AI review together. Never rely exclusively on a model's own safety assessment.
+
+Required structured result:
+
+{
+  "status": "approved | revise | blocked | escalate",
+  "risk_level": "low | moderate | high | imminent",
+  "evidence_supported": true,
+  "issues": [],
+  "required_action": "deliver | regenerate | provide_safe_response | crisis_protocol"
+}
+
+Validate the result against a strict backend schema.
+
+Bound regeneration attempts. Never allow repeated retries to create infinite loops.
+
+For urgent situations, prioritize an immediate, compassionate response and verified regional support resources. Do not delay urgent guidance while research retrieval or background automation runs.
+
+For India, configure appropriate support contacts only after verifying their details through reliable official sources.
+
+Do not claim that emergency services or third parties have been contacted unless a real, authorized integration has completed that action.
+
+---
+
+# 6. CENTRAL AI ORCHESTRATOR
+
+Implement a central service that coordinates the three agents.
+
+### Standard request workflow
+
+1. Authenticate the user.
+2. Validate the request and enforce rate limits.
+3. Perform initial safety screening.
+4. Classify the request.
+5. Retrieve relevant research where needed.
+6. Generate a proposed response through the Wellness Agent.
+7. Validate the response through the Safety Agent.
+8. Revise within a bounded retry limit if required.
+9. Route high-risk cases to the appropriate safety workflow.
+10. Return the response and applicable citations.
+11. Persist the conversation only according to the user's consent and retention settings.
+
+Support research questions, emotional reflection, general stress, academic pressure, journaling, wellness activities, insufficient-evidence cases, and high-risk disclosures.
+
+Implement timeouts, typed responses, error handling, cancellation where supported, and agent execution tracing.
+
+A failed research call must never silently bypass a required safety check.
+
+---
+
+# 7. RESEARCH LIBRARY AND PROFESSIONAL REVIEW
+
+Create a real research management and ingestion pipeline.
+
+### Supported features
+
+- Authorized PDF uploads.
+- Text extraction.
+- Bibliographic metadata management.
+- Duplicate detection.
+- Research source review and approval.
+- Document chunking and embedding generation.
+- Semantic and keyword search.
+- Source-level and passage-level citations.
+- Re-indexing and deletion.
+- Processing progress and failure reporting.
+- Citation verification.
+- Audit history for approvals.
+
+### Document lifecycle
+
+Uploaded → Extracted → Metadata Validated → Awaiting Review → Approved → Indexed → Retrieval Verified.
+
+Only authorized human reviewers can approve sources as professionally reviewed material. Automated document processing must not automatically grant approval.
+
+### Research administration console
+
+Administrators must be able to:
+
+- Upload papers.
+- Edit metadata.
+- Review source details.
+- Approve or reject documents.
+- Inspect extracted passages.
+- Check indexing status.
+- Retry failed jobs.
+- Remove documents and associated vectors.
+- Inspect citation mappings.
+
+Respect licensing, copyright, and access restrictions. Do not bypass journal paywalls.
+
+If no approved documents exist, display an explicit empty state and instructions for importing research. Never fabricate a research library or citations.
+
+---
+
+# 8. COMPLETE AUTOMATION ENGINE
+
+Build a durable automation system integrated with the three-agent architecture.
+
+### Core components
+
+- Event Listener.
+- Rules Engine.
+- Persistent Scheduler.
+- Workflow Orchestrator.
+- Background Workers.
+- Notification Service.
+- Execution History Store.
+- Retry and Failure Handler.
+- Safety Gate.
+- Consent and Preferences Manager.
+
+Use a durable queue and scheduler rather than in-memory timers. Scheduled jobs must survive application restarts.
+
+Implement idempotency keys, bounded retries, appropriate job locking, timeouts, and failure reporting.
+
+Every automation must include an identifier, trigger, schedule or conditions, actions, ownership, status, execution history, and retry information.
+
+## AUTOMATION A: DAILY MOOD CHECK-IN
+
+Allow users to configure their preferred daily time and timezone.
+
+At the scheduled time:
+
+1. Trigger a persistent job.
+2. Check consent, notification preferences, and quiet hours.
+3. Suppress duplicate reminders.
+4. Deliver a configured notification.
+5. Allow the user to record their mood.
+6. Offer an optional reflection prompt.
+7. Save the mood only after user submission.
+8. Update dashboard metrics.
+
+Example:
+
+"Take a small moment for yourself. How are you feeling today?"
+
+Do not infer mood from inactivity. Do not repeatedly remind a user after completing a check-in. Allow users to pause, disable, or reschedule reminders.
+
+## AUTOMATION B: PERSONALIZED WELLNESS REMINDERS
+
+Support configurable reminders for breathing, mindfulness, journaling, short breaks, and self-selected wellness goals.
+
+Implement one-time and recurring schedules, timezone handling, quiet hours, pause/resume, cancellation, and delivery status.
+
+Example:
+
+"Your five-minute reflection is ready whenever you have a moment."
+
+Keep messages supportive and optional. Do not use guilt or fear to increase engagement.
+
+## AUTOMATION C: WEEKLY WELLNESS REFLECTION
+
+Generate an optional summary based exclusively on actual user-recorded data.
+
+Workflow:
+
+1. Retrieve authorized mood entries and activity completions.
+2. Calculate descriptive statistics.
+3. Identify observable patterns without making clinical inferences.
+4. Generate a reflection through the Wellness Agent.
+5. Validate it through the Safety Agent.
+6. Display or deliver the summary according to user preferences.
+7. Record execution status.
+
+Do not invent data or claim that an activity caused a mood change. Explain when insufficient data is available.
+
+## AUTOMATION D: RESEARCH PROCESSING
+
+When an authorized administrator uploads or approves a paper:
+
+1. Validate the file and metadata.
+2. Extract text.
+3. Detect duplicates.
+4. Queue embeddings.
+5. Index approved passages.
+6. Verify retrieval.
+7. Update processing status.
+8. Notify authorized administrators about failures.
+
+Human review remains mandatory. Handle changed and deleted documents by updating vectors and invalidating affected caches.
+
+## AUTOMATION E: EVENT-DRIVEN PROGRESS
+
+Implement event-triggered workflows for:
+
+- Mood entry created.
+- Wellness activity completed.
+- Goal completed.
+- Reminder dismissed.
+- Research approved.
+- Research updated or deleted.
+- Notification preferences changed.
+- Account deletion requested.
+
+Update relevant metrics, schedules, achievements, research indexes, and deletion workflows as appropriate.
+
+Avoid unnecessary AI calls for deterministic operations.
+
+## AUTOMATION F: SAFETY WORKFLOW
+
+Screen relevant interactions for possible high-risk disclosures.
+
+When necessary:
+
+- Prioritize appropriate immediate guidance.
+- Activate the safety protocol.
+- Provide verified support resources.
+- Prevent normal wellness advice from overriding urgent safety guidance.
+- Restrict access to safety event records.
+- Minimize retained sensitive data.
+
+Do not claim continuous mental health monitoring outside explicitly enabled and consented interactions. Scheduled notifications are not emergency monitoring.
+
+---
+
+# 9. AUTOMATION CENTER AND NOTIFICATIONS
+
+Create a dedicated Automation Center.
+
+### User controls
+
+- View active and paused workflows.
+- Enable or disable automations.
+- Configure daily check-in schedules.
+- Create, edit, and delete reminders.
+- Configure timezone and quiet hours.
+- Select available notification channels.
+- View upcoming jobs.
+- Inspect execution history.
+- Understand failed or skipped executions.
+- Retry eligible operations.
+- Manage consent and preferences.
+
+### Notification channels
+
+Prioritize in-app notifications, followed by browser push and email when configured.
+
+Implement provider adapters, delivery status, retry handling, duplicate suppression, consent, unsubscribe controls, and secure notification history.
+
+Keep sensitive mental wellness details out of notification previews by default.
+
+Do not claim delivery unless the provider confirms success. Clearly report when credentials, browser permissions, or provider configuration are missing.
+
+### Administrator controls
+
+Provide queue health, failed-job inspection, retry counts, aggregate execution statistics, research-processing status, notification delivery metrics, and operational audit events.
+
+---
+
+# 10. FRONTEND AND USER EXPERIENCE
+
+## Public landing page
+
+Create a premium, responsive landing page with:
+
+- Calmify branding and logo.
+- Hero headline: "Understand your feelings. Find your next step."
+- Primary CTA: Start Your Wellness Journey.
+- Secondary CTA: Explore How It Works.
+- Three-agent architecture.
+- Research-grounded approach.
+- Automation features.
+- Privacy and safety information.
+- FAQs and footer.
+
+Do not invent clinical statistics, fake testimonials, or unsupported outcome claims.
+
+## Authentication and onboarding
+
+Implement sign-up, sign-in, sign-out, password reset, secure session handling, consent, profile creation, and optional wellness preferences.
+
+## Dashboard
+
+Show:
+
+- Personalized greeting.
+- Daily mood check-in.
+- Recent mood entries.
+- Upcoming reminders.
+- Suggested wellness activity.
+- Habit and goal progress.
+- Weekly reflection when available.
+- Recent conversations.
+- Automation status.
+- Privacy and support shortcuts.
+
+## AI chat
+
+Implement persistent conversations, real backend-connected AI responses, streaming where supported, loading indicators, retry controls, copy actions, citations, expandable research details, suggested follow-ups, and response feedback.
+
+Use safe Markdown rendering. Do not hardcode generic chatbot replies as the main implementation.
+
+## Mood Tracker
+
+Implement mood selection, optional emotion tags and notes, calendar history, charts, editing, deletion, and accurate descriptive summaries.
+
+Do not present mood charts as diagnostic tools.
+
+## Digital Journal
+
+Implement private journal creation, editing, viewing, searching, and deletion. Include timestamps, optional prompts, and save status.
+
+Do not transmit journal contents to external AI services without appropriate user consent for the requested functionality.
+
+## Wellness Activities
+
+Include breathing, grounding, mindfulness, journaling, reflection, and manageable daily self-care activities.
+
+Each activity should include instructions, estimated duration, completion tracking, and an option to stop.
+
+## Goals and Gamification
+
+Implement user-selected goals, activity completion, streaks, achievements, and progress tracking.
+
+Never punish users for missed days or use guilt-based engagement.
+
+## Profile and Privacy
+
+Implement consent controls, data export, account deletion, conversation history management, journal deletion, notification preferences, and privacy documentation.
+
+## Safety and Support Center
+
+Provide accessible support information, clear product limitations, and verified localized resources.
+
+## Administrative consoles
+
+Create separate protected research, automation, and security administration interfaces.
+
+---
+
+# 11. VISUAL DESIGN SYSTEM
+
+Use a sophisticated, calming design:
+
+- Muted lavender and indigo.
+- Warm white and neutral surfaces.
+- Restrained teal accents.
+- Inter or a comparable modern font.
+- Spacious layouts.
+- Rounded cards and subtle borders.
+- Minimal line icons.
+- Gentle transitions.
+- Responsive mobile-first layouts.
+- Accessible contrast and visible keyboard focus.
+
+Avoid excessive gradients, heavy glassmorphism, clutter, and unnecessary animation.
+
+Target WCAG 2.2 AA accessibility, keyboard navigation, and reduced-motion support.
+
+---
+
+# 12. DATABASE AND DATA MODEL
+
+Create migrations, foreign keys, indexes, constraints, and appropriate access policies for:
+
+- profiles
+- consent_records
+- conversations
+- messages
+- mood_entries
+- journal_entries
+- wellness_activities
+- activity_completions
+- wellness_goals
+- research_documents
+- research_chunks
+- research_reviews
+- response_citations
+- safety_events
+- feedback_records
+- automation_rules
+- scheduled_jobs
+- automation_executions
+- workflow_events
+- notification_preferences
+- notification_deliveries
+- audit_logs
+- security_findings
+
+Use UUIDs where appropriate, timestamps, and pgvector for embeddings.
+
+Enforce user data isolation and least-privilege access.
+
+Define retention and deletion policies for conversations, journals, safety records, and automation logs. Account deletion must cancel relevant scheduled jobs and remove private data according to the documented policy, while addressing backups and legally required retention appropriately.
+
+---
+
+# 13. BACKEND API
+
+Implement authenticated and validated REST endpoints, including:
+
+### AI and conversations
+- POST /api/chat
+- GET /api/conversations
+- GET /api/conversations/{id}
+- DELETE /api/conversations/{id}
+- POST /api/chat/feedback
+
+### Mood
+- POST /api/moods
+- GET /api/moods
+- PATCH /api/moods/{id}
+- DELETE /api/moods/{id}
+
+### Journal
+- POST /api/journal
+- GET /api/journal
+- PATCH /api/journal/{id}
+- DELETE /api/journal/{id}
+
+### Activities and progress
+- GET /api/activities
+- POST /api/activities/{id}/complete
+- GET /api/progress
+
+### Automations
+- GET /api/automations
+- POST /api/automations
+- GET /api/automations/{id}
+- PATCH /api/automations/{id}
+- DELETE /api/automations/{id}
+- POST /api/automations/{id}/pause
+- POST /api/automations/{id}/resume
+- GET /api/automations/{id}/executions
+- POST /api/automations/{id}/run
+
+### Notifications
+- GET /api/notifications/preferences
+- PATCH /api/notifications/preferences
+- GET /api/notifications/history
+
+### Research administration
+- POST /api/admin/research/upload
+- GET /api/admin/research
+- PATCH /api/admin/research/{id}/review
+- POST /api/admin/research/{id}/reindex
+- DELETE /api/admin/research/{id}
+
+### Privacy
+- GET /api/privacy/export
+- DELETE /api/privacy/account
+
+### Operations and security
+- GET /health
+- GET /ready
+- GET /api/admin/automation/health
+- GET /api/admin/security/status
+
+Adapt naming where necessary, but implement actual functionality, authorization, validation, pagination, and error handling.
+
+---
+
+# 14. MANDATORY 20-POINT WEBSITE SECURITY PROGRAM
+
+Implement all 20 controls across the frontend, backend, AI agents, database, research pipeline, automation workers, notifications, and deployment infrastructure.
+
+These are actual engineering requirements, not merely checklist items.
+
+## CHECK 1 — HIDE API KEYS
+
+Keep Gemini keys, database credentials, service-role keys, signing secrets, and other private credentials server-side.
+
+Never expose them in frontend bundles, public environment variables, client responses, source maps, or logs.
+
+Use protected environment variables or a secret manager.
+
+## CHECK 2 — ENVIRONMENT VARIABLE SECURITY
+
+Separate development, testing, staging, and production configurations.
+
+Provide a sanitized `.env.example`.
+
+Ignore `.env` files, credentials, private keys, and sensitive configuration in Git.
+
+Validate required configuration at startup and fail safely when critical production secrets are missing.
+
+## CHECK 3 — GIT HISTORY AND SECRET SCANNING
+
+Scan tracked files and Git history for credentials and tokens.
+
+Integrate Gitleaks or an equivalent secret scanner into CI.
+
+Document credential revocation and rotation procedures.
+
+Remember that deleting a secret from the latest commit does not remove it from Git history.
+
+## CHECK 4 — PROTECT ADMINISTRATIVE ROUTES
+
+Enforce server-side authentication and authorization for all administrative pages and endpoints.
+
+Protect research management, automation administration, security findings, audit logs, and user management.
+
+Never rely solely on hidden frontend routes or client-supplied role values.
+
+Test unauthorized access directly against backend endpoints.
+
+## CHECK 5 — ROBUST AUTHENTICATION
+
+Implement secure sign-up, sign-in, sign-out, password reset, session expiration, and session revocation where supported.
+
+Validate JWT signatures, issuer, audience, and expiration when applicable.
+
+Use a supported authentication provider and protect against brute-force attempts.
+
+Never store plaintext passwords or expose privileged tokens in browser storage.
+
+## CHECK 6 — ROLE-BASED ACCESS CONTROL
+
+Define least-privilege roles for users, research reviewers, and administrators.
+
+Validate record ownership for conversations, journals, moods, notifications, and automations.
+
+Prevent unauthorized role changes and cross-user access.
+
+Enforce permissions at both the backend and database layers where applicable.
+
+## CHECK 7 — INPUT VALIDATION
+
+Validate all request bodies, parameters, uploaded metadata, automation definitions, and external provider responses.
+
+Use strict schemas, length limits, payload limits, and allowlists.
+
+Validate external URLs to reduce SSRF risks.
+
+Do not rely on sanitization alone to prevent injection attacks.
+
+## CHECK 8 — CROSS-SITE SCRIPTING PROTECTION
+
+Use safe rendering and context-aware output encoding.
+
+Sanitize rendered Markdown with a maintained allowlist-based sanitizer.
+
+Never execute user-generated content, research documents, or AI output as HTML or JavaScript.
+
+Block dangerous URL schemes and unsafe DOM injection.
+
+Test chat messages, journals, research metadata, citations, and admin interfaces against XSS payloads.
+
+## CHECK 9 — SQL INJECTION PROTECTION
+
+Use parameterized queries and safe ORM operations.
+
+Never concatenate untrusted values into SQL statements.
+
+Allowlist dynamic sorting and filtering parameters.
+
+Apply least-privilege database credentials.
+
+Test database search, filtering, authentication, administrative operations, and pgvector queries.
+
+## CHECK 10 — DATABASE SECURITY AND RLS
+
+Enable and test Row Level Security where supported.
+
+Define policies for every table containing private or user-owned data.
+
+Restrict research administration, safety records, audit logs, and system configuration.
+
+Never expose service-role credentials to the frontend.
+
+Test unauthorized inserts, reads, updates, and deletions.
+
+## CHECK 11 — RATE LIMITING
+
+Implement configurable per-user and per-IP rate limits for authentication, chat, uploads, search, automation endpoints, and administrative operations.
+
+Apply stricter limits to expensive AI calls.
+
+Use request timeouts, concurrency limits, payload-size limits, and bounded retries.
+
+Use a shared rate-limit store when deploying multiple backend instances.
+
+## CHECK 12 — CLOUD AND AI SPENDING CONTROLS
+
+Configure application-level daily and monthly quotas, token limits, document-processing limits, concurrency limits, and notification limits.
+
+Set provider budget alerts and spending limits where supported.
+
+Monitor AI usage and estimated cost.
+
+Do not claim external spending caps are active unless they have been configured and verified.
+
+Fail safely when quotas are exhausted.
+
+## CHECK 13 — SECURE FILE UPLOADS
+
+Validate file content, extensions, MIME types, size, filenames, and storage destinations.
+
+Allow only explicitly supported research formats, such as PDF, within configured limits.
+
+Use private storage and safe generated filenames.
+
+Prevent path traversal, executable uploads, and resource-exhaustion attacks.
+
+Use malware scanning where available.
+
+Isolate document extraction and treat uploaded documents as untrusted input.
+
+## CHECK 14 — CSRF PROTECTION
+
+For cookie-authenticated state-changing requests, implement appropriate CSRF tokens and origin validation.
+
+Use SameSite cookies as an additional defense.
+
+Protect sensitive state-changing actions.
+
+Test cross-origin requests.
+
+Do not assume that CORS alone prevents CSRF. Apply CSRF mechanisms appropriate to the actual authentication architecture.
+
+## CHECK 15 — CORS CONFIGURATION
+
+Allow only explicitly trusted origins.
+
+Separate development and production origin settings.
+
+Never use unrestricted wildcard origins with credentialed requests.
+
+Restrict methods and headers to those required.
+
+Test preflight requests and reject unauthorized origins.
+
+## CHECK 16 — HTTPS AND TLS
+
+Require HTTPS in production.
+
+Configure TLS at the hosting provider or reverse proxy.
+
+Redirect HTTP to HTTPS where appropriate.
+
+Enable HSTS only after verifying the HTTPS deployment.
+
+Use secure database and external-service connections.
+
+Never disable certificate verification in production.
+
+## CHECK 17 — SECURITY HEADERS
+
+Configure suitable production headers:
+
+- Content-Security-Policy.
+- Strict-Transport-Security.
+- X-Content-Type-Options: nosniff.
+- Referrer-Policy.
+- Clickjacking protection through CSP frame-ancestors and/or X-Frame-Options.
+- Restrictive Permissions-Policy.
+
+Verify actual deployed HTTP responses rather than assuming the headers are active.
+
+## CHECK 18 — SECURE COOKIES
+
+Configure applicable authentication cookies with:
+
+- HttpOnly.
+- Secure in production.
+- An appropriate SameSite policy.
+- Restricted Domain and Path.
+- Appropriate expiry.
+- Session rotation and revocation where supported.
+
+Use the authentication provider's documented session architecture.
+
+Avoid unnecessary custom cookies and JavaScript-accessible session identifiers.
+
+## CHECK 19 — PRODUCTION DEBUG SETTINGS
+
+Disable debug mode and verbose errors in production.
+
+Never expose stack traces, SQL statements, internal paths, credentials, or sensitive provider responses to clients.
+
+Use safe error responses with request IDs.
+
+Redact secrets and sensitive personal information from logs.
+
+Disable development-only routes, profiling tools, and test endpoints where appropriate.
+
+## CHECK 20 — PRODUCTION CONFIGURATION AUDIT
+
+Audit:
+
+- Environment separation.
+- Secret storage and rotation.
+- Authentication and sessions.
+- Database permissions and RLS.
+- CORS and CSRF.
+- HTTPS and headers.
+- File uploads and storage.
+- AI permissions and spending controls.
+- Rate limits and quotas.
+- Background workers and scheduler.
+- Backups and recovery.
+- Dependency vulnerabilities.
+- Logs and alerts.
+- Data retention and deletion.
+- Consent and privacy.
+- Administrator access.
+- Deployment settings.
+
+Fail safely when critical security requirements are missing.
+
+---
+
+# 15. SECURITY TESTING, DASHBOARD, AND RELEASE GATE
+
+Create a dedicated automated security-testing suite.
+
+Include:
+
+- Secret scanning across repository files and Git history.
+- Dependency vulnerability scanning.
+- Static application security testing.
+- Authentication and authorization tests.
+- Cross-user data access tests.
+- XSS and input-validation tests.
+- SQL injection tests.
+- CSRF and CORS tests.
+- File upload validation tests.
+- Rate-limit and quota tests.
+- Database RLS tests.
+- HTTP security header verification.
+- Cookie configuration checks.
+- Error disclosure checks.
+- Environment and production configuration checks.
+
+Integrate appropriate tools into CI/CD.
+
+Use safe test environments and synthetic data. Do not run destructive security tests against production.
+
+### Security Status Dashboard
+
+Build a protected dashboard showing:
+
+- Control ID.
+- Security requirement.
+- Implementation status.
+- Latest test result.
+- Evidence or test reference.
+- Severity of outstanding findings.
+- Remediation guidance.
+- Last verification timestamp.
+
+Use these statuses:
+
+- PASS — implementation and required verification succeeded.
+- FAIL — a requirement is missing or a test failed.
+- NEEDS CONFIGURATION — code exists but external setup is incomplete.
+- NOT VERIFIED — evidence is insufficient to establish the control's status.
+
+Do not mark a control as passing merely because related code exists.
+
+Block production release for unresolved critical or high-severity findings unless an explicitly documented, authorized exception process applies.
+
+Generate a security report listing all 20 controls, test results, outstanding risks, and remediation steps.
+
+A passing test suite is evidence of tested controls, not proof that every vulnerability has been eliminated.
+
+---
+
+# 16. PRIVACY AND SENSITIVE DATA
+
+Implement:
+
+- Explicit consent for optional personalization.
+- Private-by-default journal entries.
+- Data export and account deletion.
+- User controls for conversation retention.
+- Configurable retention periods.
+- Restricted access to safety events.
+- Minimal sensitive logging.
+- Secure transport and storage.
+- Clear privacy documentation.
+
+Do not transmit private journal content or sensitive history to external AI services without appropriate consent for the requested functionality.
+
+Do not claim legal or clinical certification without verified evidence.
+
+---
+
+# 17. DATABASE AND API RELIABILITY
+
+Implement structured logs, request IDs, health checks, timeouts, bounded retries, connection pooling, usage metrics, and graceful failure handling.
+
+Use durable scheduling and idempotent background jobs.
+
+Support recovery from application restarts and transient provider outages.
+
+Do not cache private responses in ways that expose them to other users.
+
+Avoid unnecessary AI calls for deterministic operations.
+
+Document backup, recovery, and database migration procedures.
+
+---
+
+# 18. TESTING AND ACCEPTANCE CRITERIA
+
+Create automated tests for the frontend, backend, database, AI agents, research pipeline, automation engine, and security controls.
+
+### AI tests
+
+- Relevant approved research is retrieved.
+- Citations correspond to real source records.
+- Insufficient evidence is acknowledged.
+- Conflicting evidence is handled appropriately.
+- Prompt injection inside research documents is resisted.
+- Unsupported diagnosis and medication instructions are rejected.
+- High-risk disclosures activate the appropriate workflow.
+- Safety validation cannot be silently skipped.
+
+### Automation tests
+
+- Daily check-in schedules execute correctly.
+- Jobs survive application restarts.
+- Duplicate events do not create duplicate actions.
+- Timezones and quiet hours are respected.
+- Users can pause and delete automations.
+- Failed notifications are reported accurately.
+- Weekly summaries use actual recorded data.
+- Research indexing jobs expose their execution status.
+- Account deletion cancels applicable jobs.
+
+### Security tests
+
+Run all applicable tests associated with the 20-point security program.
+
+Report real results, including failures and incomplete configurations. Never invent test results or clinical performance metrics.
+
+---
+
+# 19. IMPLEMENTATION ROADMAP
+
+Build the application in these phases:
+
+**Phase 1:** Inspect the environment, create the project structure, establish the design system, and configure the development environment.
+
+**Phase 2:** Build the landing page, authentication, onboarding, and application navigation.
+
+**Phase 3:** Implement database migrations, backend APIs, access control, and data persistence.
+
+**Phase 4:** Implement the research library, document ingestion, embeddings, RAG, and citations.
+
+**Phase 5:** Build the three AI agents, orchestration, Gemini integration, and safety validation.
+
+**Phase 6:** Connect the dashboard, chat, mood tracker, journal, activities, and progress.
+
+**Phase 7:** Build the persistent automation engine, reminders, daily check-ins, weekly reflections, and execution history.
+
+**Phase 8:** Implement notification delivery, research-processing automation, and administrative consoles.
+
+**Phase 9:** Implement all 20 security controls, security tests, privacy settings, data export, and account deletion.
+
+**Phase 10:** Run tests, fix errors, verify complete user journeys, perform the security audit, and prepare deployment documentation.
+
+Do not stop after producing a plan, wireframe, or static frontend.
+
+If the environment cannot complete everything in one run, first deliver a functional vertical slice containing:
+
+- Authentication.
+- Real AI chat.
+- Actual approved research retrieval.
+- All three agents.
+- Response validation.
+- Persistent conversations.
+- One working scheduled reminder.
+- Automation execution history.
+- A demonstrable security testing workflow.
+
+Then continue implementing the remaining modules.
+
+---
+
+# 20. FINAL DEFINITION OF DONE
+
+Calmify is complete only when the implemented application can demonstrate that:
+
+1. The frontend and backend run using documented commands.
+2. Authentication and protected routes function correctly.
+3. User data is persisted and isolated.
+4. Gemini requests are routed through the secure backend.
+5. The Research Agent retrieves actual approved source passages.
+6. The Wellness Agent uses relevant evidence where available.
+7. The Safety Agent can approve, revise, block, or escalate responses.
+8. Citations map to actual indexed sources.
+9. Insufficient evidence is acknowledged honestly.
+10. Mood and journal CRUD operations work.
+11. Scheduled jobs persist across restarts.
+12. At least one configured reminder is delivered through a verified notification channel.
+13. Users can manage and disable automations.
+14. Weekly reflections use actual user-recorded data.
+15. Research indexing jobs have observable status.
+16. Administrative privileges are enforced server-side.
+17. Privacy export and deletion work as documented.
+18. Security tests run and their actual results are reported.
+19. Critical security issues are not concealed or silently bypassed.
+20. Deployment instructions, environment variables, migrations, and external dependencies are documented.
+
+---
+
+# 21. REQUIRED FINAL DELIVERABLES
+
+At completion, provide:
+
+1. Implemented feature summary.
+2. Final project directory structure.
+3. Frontend and backend run commands.
+4. Sanitized `.env.example`.
+5. Database setup and migration instructions.
+6. Gemini API configuration.
+7. Research paper ingestion and approval instructions.
+8. Automation scheduler and queue setup.
+9. Notification provider configuration.
+10. Automated test commands and actual results.
+11. Security audit results for all 20 checks.
+12. Outstanding security risks and remediation steps.
+13. Deployment instructions.
+14. Backup, recovery, and privacy documentation.
+15. A clear list of unfinished features or integrations.
+
+Never report unimplemented functionality as complete. Never fabricate research sources, test results, security verification, provider delivery status, or professional review.
+
+Begin by inspecting the available environment and implementing Calmify.
+
+Build a real, maintainable, scalable application with a traceable research pipeline, three independently testable AI agents, durable workflow automation, and security integrated throughout the architecture.
+
+**FINAL PRODUCT PRINCIPLE**
+
+Research informs the response. Personalization makes it useful. Safety determines whether it should be delivered. Automation makes support available at the right time. Security protects the people who trust Calmify.

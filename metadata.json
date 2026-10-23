@@ -1,0 +1,6 @@
+{
+  "name": "Calmify",
+  "description": "A healthier mind, one day at a time. AI-powered mental wellness platform featuring research-grounded guidance, three specialized AI agents, and workflow automations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
